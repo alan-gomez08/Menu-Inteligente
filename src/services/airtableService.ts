@@ -9,7 +9,7 @@ import type {
 } from '../types/airtable';
 import { parsePrice } from '../utils/formatters';
 
-const DEFAULT_BASE_ID = 'appSto9x58z542Pgb';
+const DEFAULT_BASE_ID = 'appQvWaZRnWWpkmo3';
 
 function getBaseUrl(): { apiUrl: string; baseId: string; token: string } {
   const token = import.meta.env.VITE_AIRTABLE_TOKEN;
