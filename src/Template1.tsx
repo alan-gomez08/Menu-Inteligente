@@ -277,17 +277,14 @@ export default function Template1() {
               aria-hidden="true"
             />
 
-            <div className="relative max-w-[1320px] mx-auto flex items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-[13px]">
-              {/* Badge con gradiente terracota y micro-sombra */}
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#D9532F] to-[#EA580C] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider shrink-0 shadow-[0_2px_8px_rgba(217,83,47,0.35)] border border-white/15">
-                <Sparkles className="w-3 h-3 text-white animate-pulse shrink-0" />
-                <span>Promo Activa</span>
+            <div className="relative max-w-[1320px] mx-auto flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-[13px]">
+              {/* Texto de la promoción con tipografía destacada e icono destello */}
+              <div className="flex items-center gap-2 shrink-0">
+                <Sparkles className="w-3.5 h-3.5 text-[#D9532F] animate-pulse shrink-0" />
+                <span className="font-extrabold text-white tracking-tight text-xs sm:text-[13px] drop-shadow-xs">
+                  {bannerText.trim()}
+                </span>
               </div>
-
-              {/* Texto de la promoción con tipografía destacada */}
-              <span className="font-extrabold text-white tracking-tight truncate drop-shadow-xs">
-                {bannerText.trim()}
-              </span>
 
               {/* Bajada sutil explicativa para mayor confianza */}
               <div className="hidden sm:flex items-center gap-1.5 text-stone-300 text-[11px] font-medium shrink-0">
@@ -295,11 +292,18 @@ export default function Template1() {
                 <span>Se bonifica automáticamente en el carrito</span>
               </div>
 
-              {/* Micro-chip interactivo */}
-              <div className="hidden lg:flex items-center gap-1 text-[11px] font-semibold text-[#FF8F6B] bg-white/5 hover:bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10 transition-colors shrink-0">
+              {/* Botón de acción con color destacado terracota */}
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById('hamburguesas') || document.querySelector('main');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white bg-[#D9532F] hover:bg-[#C24422] px-3 py-1 rounded-full shadow-[0_2px_8px_rgba(217,83,47,0.35)] hover:shadow-[0_2px_12px_rgba(217,83,47,0.5)] transition-all shrink-0 cursor-pointer active:scale-95 ml-1"
+              >
                 <span>Aprovechala hoy</span>
-                <ArrowRight className="w-3 h-3 text-[#FF8F6B] shrink-0" />
-              </div>
+                <ArrowRight className="w-3.5 h-3.5 text-white shrink-0" />
+              </button>
             </div>
           </div>
         )}
