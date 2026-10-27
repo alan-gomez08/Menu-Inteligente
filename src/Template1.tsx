@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { Toaster, toast } from 'sonner';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
@@ -268,22 +268,38 @@ export default function Template1() {
           onSearchChange={setSearchQuery}
         />
 
-        {/* BANNER PROMOCIONAL LIMPIO DEBAJO DE LA NAVBAR */}
+        {/* BANNER PROMOCIONAL PULIDO (Satin Ember Food-Tech Ribbon) */}
         {bannerText && bannerText.trim() && (
-          <div className="w-full bg-[#FAF1ED] border-y border-[#EADBD5]/80 py-2 px-4 select-none">
-            <div className="max-w-[1320px] mx-auto flex items-center justify-center gap-2 text-xs sm:text-[13px]">
-              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#D9532F]/10 text-[#D9532F] shrink-0">
-                <Sparkles className="w-3.5 h-3.5 stroke-[2.2]" />
-              </span>
-              <span className="bg-[#D9532F] text-white text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider shrink-0 shadow-2xs">
-                Promo activa
-              </span>
-              <span className="font-semibold text-stone-900 tracking-tight truncate">
+          <div className="relative w-full bg-gradient-to-r from-[#1A1816] via-[#26201C] to-[#1A1816] text-white border-y border-stone-800/90 py-2 sm:py-2.5 px-4 select-none overflow-hidden shadow-inner/10">
+            {/* Resplandor ambiental cálido suave detrás del texto */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-12 bg-[#D9532F]/20 blur-2xl pointer-events-none rounded-full"
+              aria-hidden="true"
+            />
+
+            <div className="relative max-w-[1320px] mx-auto flex items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-[13px]">
+              {/* Badge con gradiente terracota y micro-sombra */}
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-[#D9532F] to-[#EA580C] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider shrink-0 shadow-[0_2px_8px_rgba(217,83,47,0.35)] border border-white/15">
+                <Sparkles className="w-3 h-3 text-white animate-pulse shrink-0" />
+                <span>Promo Activa</span>
+              </div>
+
+              {/* Texto de la promoción con tipografía destacada */}
+              <span className="font-extrabold text-white tracking-tight truncate drop-shadow-xs">
                 {bannerText.trim()}
               </span>
-              <span className="hidden md:inline text-[11px] text-stone-500 font-medium">
-                · Se aplica directo en tu pedido
-              </span>
+
+              {/* Bajada sutil explicativa para mayor confianza */}
+              <div className="hidden sm:flex items-center gap-1.5 text-stone-300 text-[11px] font-medium shrink-0">
+                <span className="w-1 h-1 rounded-full bg-[#D9532F]" aria-hidden="true" />
+                <span>Se bonifica automáticamente en el carrito</span>
+              </div>
+
+              {/* Micro-chip interactivo */}
+              <div className="hidden lg:flex items-center gap-1 text-[11px] font-semibold text-[#FF8F6B] bg-white/5 hover:bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10 transition-colors shrink-0">
+                <span>Aprovechala hoy</span>
+                <ArrowRight className="w-3 h-3 text-[#FF8F6B] shrink-0" />
+              </div>
             </div>
           </div>
         )}

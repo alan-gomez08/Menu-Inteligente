@@ -8,6 +8,8 @@ import {
   AlertCircle,
   ArrowRight,
   Lock,
+  Tag,
+  CheckCircle2,
 } from 'lucide-react';
 import type { CartItem, MenuItem } from '../../types';
 import PromoProgressBar from './PromoProgressBar';
@@ -266,6 +268,73 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
                     copiedAlias={checkout.copiedAlias}
                     onCopyAlias={checkout.handleCopyAlias}
                   />
+                )}
+              </div>
+
+              {/* Cupón de Descuento */}
+              <div className="space-y-2 pt-3.5 border-t border-stone-100 font-sans">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-stone-800 flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-[#D9532F]" />
+                    ¿Tenés un cupón de descuento?
+                  </span>
+                  {checkout.appliedCoupon && (
+                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 tabular-nums whitespace-nowrap">
+                      {checkout.appliedCoupon.discountPercentage}% OFF
+                    </span>
+                  )}
+                </div>
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    checkout.handleApplyCoupon(e);
+                  }}
+                  className="flex gap-2"
+                >
+                  <input
+                    type="text"
+                    value={checkout.couponInput}
+                    onChange={(e) => checkout.setCouponInput(e.target.value)}
+                    disabled={Boolean(checkout.appliedCoupon)}
+                    placeholder="Ingresá tu código..."
+                    className="flex-1 py-2 px-3 rounded-xl bg-white border border-stone-200 text-stone-900 text-xs uppercase font-mono tracking-wider outline-none focus:border-[#D9532F] focus:ring-1 focus:ring-[#D9532F]/20 placeholder:normal-case placeholder:font-sans placeholder:text-stone-400 disabled:opacity-50 shadow-2xs transition-colors"
+                  />
+
+                  {checkout.appliedCoupon ? (
+                    <button
+                      type="button"
+                      onClick={checkout.handleRemoveCoupon}
+                      className="px-3.5 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 border border-stone-200 text-stone-700 text-xs font-semibold transition cursor-pointer shrink-0 active:scale-95"
+                    >
+                      Quitar
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={!checkout.couponInput.trim()}
+                      className="px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-bold transition cursor-pointer active:scale-95 shadow-xs shrink-0"
+                    >
+                      Aplicar
+                    </button>
+                  )}
+                </form>
+
+                {checkout.couponFeedback && (
+                  <p
+                    className={`text-[11px] font-medium flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border leading-tight ${
+                      checkout.couponFeedback.type === 'success'
+                        ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                        : 'bg-rose-50 border-rose-200 text-rose-800'
+                    }`}
+                  >
+                    {checkout.couponFeedback.type === 'success' ? (
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    ) : (
+                      <AlertCircle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+                    )}
+                    <span className="truncate">{checkout.couponFeedback.message}</span>
+                  </p>
                 )}
               </div>
 
