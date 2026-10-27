@@ -58,7 +58,7 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
         top: `${headerHeight}px`,
         maxHeight: `calc(100dvh - ${headerHeight}px - 20px)`,
       }}
-      className="hidden lg:flex flex-col w-full sticky lg:h-[770px] z-30 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.08)] drop-shadow-[0_6px_16px_rgba(0,0,0,0.04)]"
+      className="flex flex-col w-full sticky lg:h-[770px] z-30 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.08)] drop-shadow-[0_6px_16px_rgba(0,0,0,0.04)]"
     >
       {/* ============================================================== */}
       {/* CUERPO DEL TICKET: Nace flush desde la navbar con elevación    */}

@@ -120,7 +120,7 @@ export function useCartCheckout({
     if (nxmMatch) {
       const buyQty = parseInt(nxmMatch[1], 10);
       const payQty = parseInt(nxmMatch[2], 10);
-      const targetQuery = nxmMatch[3].trim();
+      const targetQuery = nxmMatch[3].replace(/[!¡?¿.🍔🍟🍕🥤]+$/g, '').trim();
       if (buyQty > payQty && payQty > 0 && targetQuery) {
         nxm = { buyQty, payQty, freePerGroup: buyQty - payQty, targetQuery };
       }
@@ -151,38 +151,111 @@ export function useCartCheckout({
   }, [effectiveBannerText]);
 
   const normStr = (s: string) =>
-    (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    (s || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[!¡?¿.,;:]+/g, '')
+      .trim();
 
   const matchItemTarget = useCallback((item: CartItem, target: string): boolean => {
+    if (!item || !target) return false;
     const nTarget = normStr(target);
-    const nCat = normStr(item.category || '');
+    const cleanTarget = nTarget.replace(/^(en|de|los|las|el|la)\s+/i, '').trim();
+    const targetStem = cleanTarget.replace(/s$/, '').replace(/es$/, '');
     const nTitle = normStr(item.title || '');
+    const nDesc = normStr(item.description || '');
 
-    if (
-      nCat === nTarget ||
-      nCat.replace(/s$/, '') === nTarget.replace(/s$/, '') ||
-      nCat.includes(nTarget) ||
-      nTarget.includes(nCat)
-    ) {
-      return true;
+    // 1. Recopilar todas las categorías asociadas al producto:
+    // La categoría propia del item + categorías del catálogo maestro (por ejemplo, si el item fue seleccionado desde "Destacados")
+    const categoriesSet = new Set<string>();
+    if (item.category) categoriesSet.add(normStr(item.category));
+
+    const allItems = data?.menu?.items;
+    if (allItems && Array.isArray(allItems)) {
+      for (const masterItem of allItems) {
+        if (!masterItem) continue;
+        const masterTitle = normStr(masterItem.title);
+        if (
+          masterItem.id === item.id ||
+          masterTitle === nTitle ||
+          (masterTitle.length > 3 && nTitle.length > 3 && (masterTitle.includes(nTitle) || nTitle.includes(masterTitle)))
+        ) {
+          if (masterItem.category) {
+            categoriesSet.add(normStr(masterItem.category));
+          }
+        }
+      }
     }
 
-    if (nTarget.includes('bebid') || nTarget.includes('trago') || nTarget.includes('gaseosa')) {
-      if (nCat.includes('bebid')) return true;
-      if (nTitle.match(/coca|pepsi|sprite|fanta|agua|cerveza|gaseosa|jugo|heineken|crystal|corona/i)) {
+    // 2. Coincidencia directa por categoría (exacta, raíz o contenida)
+    for (const cat of categoriesSet) {
+      const catStem = cat.replace(/s$/, '').replace(/es$/, '');
+      if (
+        cat === cleanTarget ||
+        catStem === targetStem ||
+        (cleanTarget.length >= 3 && cat.includes(cleanTarget)) ||
+        (catStem.length >= 3 && cleanTarget.includes(catStem))
+      ) {
         return true;
       }
     }
 
-    if (nTitle.includes(nTarget) || nTarget.includes(nTitle)) {
+    // 3. Dominios semánticos y sinónimos gastronómicos comunes
+    // A. Hamburguesas / Burgers / Smash
+    const targetIsBurger = /burger|hamburgues|smash|medallon/i.test(cleanTarget);
+    if (targetIsBurger) {
+      for (const cat of categoriesSet) {
+        if (/burger|hamburgues/i.test(cat)) return true;
+      }
+      if (/burger|hamburgues|smash|cheddar|crispy chicken/i.test(nTitle)) return true;
+      if (/medallon|carne smash|pan brioche|pan de papa|hamburguesa/i.test(nDesc)) return true;
+    }
+
+    // B. Tacos / Comida mexicana
+    const targetIsTaco = /taco|quesadilla|burrito|fajita|mexican/i.test(cleanTarget);
+    if (targetIsTaco) {
+      for (const cat of categoriesSet) {
+        if (/taco|mexican/i.test(cat)) return true;
+      }
+      if (/taco|burrito|quesadilla|fajita|asada|al pastor/i.test(nTitle)) return true;
+    }
+
+    // C. Bebidas / Tragos / Gaseosas
+    const targetIsBeverage = /bebid|trago|gaseos|refresc|cervez|drink|lata|agua/i.test(cleanTarget);
+    if (targetIsBeverage) {
+      for (const cat of categoriesSet) {
+        if (/bebid|trago|gaseos|cervez|drink/i.test(cat)) return true;
+      }
+      if (/coca|pepsi|sprite|fanta|agua|cerveza|gaseosa|jugo|heineken|crystal|corona|lata|botella|limonada/i.test(nTitle)) {
+        return true;
+      }
+    }
+
+    // D. Opciones Veggie / Vegetarianas / Veganas
+    const targetIsVeggie = /veggie|vegetari|vegan|plant/i.test(cleanTarget);
+    if (targetIsVeggie) {
+      for (const cat of categoriesSet) {
+        if (/veggie|vegetari|vegan/i.test(cat)) return true;
+      }
+      if (/veggie|vegan|vegetari|plant-based|notburger|lentejas/i.test(nTitle)) return true;
+    }
+
+    // 4. Coincidencia por texto del título del producto
+    if (
+      (cleanTarget.length >= 3 && nTitle.includes(cleanTarget)) ||
+      (targetStem.length >= 3 && nTitle.includes(targetStem)) ||
+      (nTitle.length >= 3 && cleanTarget.includes(nTitle))
+    ) {
       return true;
     }
 
     return false;
-  }, []);
+  }, [data?.menu?.items]);
 
   const parseTargetList = (str: string): string[] => {
     return str
+      .replace(/[!¡?¿.🍔🍟🍕🥤]+$/g, '')
       .split(/,|\s+y\s+|\s+e\s+|\s+o\s+|&/i)
       .map((s) => s.trim().replace(/^["'«“]|["'»”]$/g, ''))
       .filter(Boolean);
@@ -321,7 +394,7 @@ export function useCartCheckout({
     if (nxmMatch) {
       const buyQty = parseInt(nxmMatch[1], 10);
       const payQty = parseInt(nxmMatch[2], 10);
-      const targetsStr = nxmMatch[3].trim();
+      const targetsStr = nxmMatch[3].replace(/[!¡?¿.🍔🍟🍕🥤]+$/g, '').trim();
       const targets = parseTargetList(targetsStr);
 
       const eligibleUnits: { item: CartItem; price: number }[] = [];
@@ -347,7 +420,7 @@ export function useCartCheckout({
           discountedItem: discountedUnits[0].item,
           fullProductName,
           description: `Promoción ${buyQty}x${payQty} (${fullProductName})`,
-          badgeText: `1u bonificada por promo ${buyQty}x${payQty}`,
+          badgeText: `${freeCount === 1 ? '1u bonificada' : `${freeCount}u bonificadas`} por promo ${buyQty}x${payQty}`,
           statusText: `Promo ${buyQty}x${payQty} aplicada a ${fullProductName} (-${formatPrice(discountAmount)})`,
           isFullyApplied: true,
           progressCurrent: eligibleUnits.length % buyQty === 0 ? buyQty : eligibleUnits.length % buyQty,

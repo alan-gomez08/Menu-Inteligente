@@ -31,13 +31,37 @@ export default function Template1() {
   useEffect(() => {
     const updateHeaderHeight = () => {
       if (headerRef.current) {
-        setHeaderHeight(headerRef.current.offsetHeight);
+        const height = headerRef.current.offsetHeight;
+        if (height > 0) {
+          setHeaderHeight(height);
+        }
       }
     };
     updateHeaderHeight();
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined' && headerRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        updateHeaderHeight();
+      });
+      resizeObserver.observe(headerRef.current);
+    }
+
     window.addEventListener('resize', updateHeaderHeight);
-    return () => window.removeEventListener('resize', updateHeaderHeight);
+    return () => {
+      window.removeEventListener('resize', updateHeaderHeight);
+      resizeObserver?.disconnect();
+    };
   }, []);
+
+  useEffect(() => {
+    if (!splashVisible && headerRef.current) {
+      const height = headerRef.current.offsetHeight;
+      if (height > 0) {
+        setHeaderHeight(height);
+      }
+    }
+  }, [splashVisible]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -205,7 +229,7 @@ export default function Template1() {
     'Av. de Mayo 1234 · Salón';
 
   return (
-    <div className="min-h-screen bg-[#F4F5F7] text-[#18181B] font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-[#F4F5F7] text-[#18181B] font-sans antialiased">
       {/* ============================================================== */}
       {/* 0. PANTALLA DE CARGA (SPLASH SCREEN) NATIVE APP STANDARD       */}
       {/* ============================================================== */}
@@ -247,7 +271,7 @@ export default function Template1() {
       {/* 3. CONTENEDOR PRINCIPAL: 2 COLUMNAS PERFECTAMENTE ALINEADAS    */}
       {/* ============================================================== */}
       <div className="max-w-[1320px] mx-auto px-5 sm:px-6 lg:px-6 pb-6 lg:pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8">
           {/* COLUMNA 1: FEED CENTRAL DE PRODUCTOS */}
           <main className="min-w-0 w-full flex flex-col pt-5 lg:pt-6">
             {/* Catálogo de Productos en Grilla Amplia de 3 Columnas */}
@@ -267,15 +291,17 @@ export default function Template1() {
           </main>
 
           {/* COLUMNA 2: CARRITO COMPLETO CON SCROLL INTERNO (STICKY REAL) */}
-          <CartDesktop
-            cart={activeCart}
-            allMenuItems={liveData.menu.items}
-            updateQuantity={updateQuantity}
-            onRemoveProduct={(item) => removeProduct(item.id)}
-            onAddToCart={addToCart}
-            checkout={checkout}
-            headerHeight={headerHeight}
-          />
+          <div className="hidden lg:block relative">
+            <CartDesktop
+              cart={activeCart}
+              allMenuItems={liveData.menu.items}
+              updateQuantity={updateQuantity}
+              onRemoveProduct={(item) => removeProduct(item.id)}
+              onAddToCart={addToCart}
+              checkout={checkout}
+              headerHeight={headerHeight}
+            />
+          </div>
         </div>
       </div>
 
