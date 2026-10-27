@@ -51,6 +51,9 @@ export interface ClientData {
   };
   identidad?: {
     colorPrincipal?: string;
+    logo?: string;
+    logoSplash?: string;
+    logoNavbar?: string;
     [key: string]: any;
   };
   config?: {

@@ -3,6 +3,11 @@ import type { ClientData } from '../types/index';
 export const configT1: ClientData = {
   templateId: 'template-1',
   businessName: 'Tu Logo',
+  identidad: {
+    logo: '/assets-t1/Logo 2.png',
+    logoNavbar: '/assets-t1/Logo 2.png',
+    logoSplash: '/assets-t1/Logo.svg',
+  },
   theme: { primaryColor: '#ffffff', secondaryColor: '#111827' },
   
   config: {
