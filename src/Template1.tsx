@@ -205,7 +205,7 @@ export default function Template1() {
     'Av. de Mayo 1234 · Salón';
 
   return (
-    <div className="min-h-screen bg-[#F4F5F7] text-[#18181B] font-sans antialiased">
+    <div className="min-h-screen bg-[#F4F5F7] text-[#18181B] font-sans antialiased overflow-x-hidden">
       {/* ============================================================== */}
       {/* 0. PANTALLA DE CARGA (SPLASH SCREEN) NATIVE APP STANDARD       */}
       {/* ============================================================== */}
