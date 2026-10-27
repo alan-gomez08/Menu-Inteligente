@@ -157,7 +157,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <div className="w-full space-y-16 sm:space-y-20 lg:space-y-24 pb-32">
+    <div className="w-full space-y-10 sm:space-y-12 lg:space-y-14 pb-32">
       {categories.map((category) => {
         const categoryItems = itemsByCategory[category] || [];
         if (categoryItems.length === 0) return null;
@@ -174,13 +174,13 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             key={category}
             id={`cat-${categorySlug}`}
             data-category={category}
-            className="w-full scroll-mt-28 space-y-5 sm:space-y-6"
+            className="w-full scroll-mt-28"
           >
-            {/* Encabezado de la categoría con fuerte jerarquía visual para segmentar el listado */}
-            <div className="flex items-center justify-between border-b border-stone-200/80 pb-3 sm:pb-3.5 mb-5 sm:mb-6">
-              <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2.5 font-sans">
+            {/* Encabezado de la categoría bien pegado a sus cards correspondientes */}
+            <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 flex items-center gap-2 font-sans">
                 <span>{category}</span>
-                <span className="text-xs text-slate-600 font-bold bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200/80 tabular-nums">
+                <span className="text-xs text-slate-500 font-bold bg-slate-200/70 px-2 py-0.5 rounded-full tabular-nums">
                   {categoryItems.length}
                 </span>
               </h2>
