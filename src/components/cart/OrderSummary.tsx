@@ -57,40 +57,40 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
         </div>
 
         {productPromo && productDiscountAmount > 0 && (
-          <div className="flex justify-between items-center text-emerald-700 font-semibold">
-            <span>Descuento {productPromo.description}:</span>
-            <span className="tabular-nums">-{formatPrice(productDiscountAmount)}</span>
+          <div className="flex justify-between items-center text-emerald-700 font-semibold gap-2 whitespace-nowrap">
+            <span className="truncate whitespace-nowrap">Descuento {productPromo.description}:</span>
+            <span className="tabular-nums shrink-0 whitespace-nowrap">-{formatPrice(productDiscountAmount)}</span>
           </div>
         )}
 
         {appliedCoupon && percentDiscountAmount > 0 && (
-          <div className="flex justify-between items-center text-emerald-700 font-semibold">
-            <span>Descuento cupón ({appliedCoupon.code} - {appliedCoupon.discountPercentage}%):</span>
-            <span className="tabular-nums">-{formatPrice(percentDiscountAmount)}</span>
+          <div className="flex justify-between items-center text-emerald-700 font-semibold gap-2 whitespace-nowrap">
+            <span className="truncate whitespace-nowrap">Descuento cupón ({appliedCoupon.code} - {appliedCoupon.discountPercentage}%):</span>
+            <span className="tabular-nums shrink-0 whitespace-nowrap">-{formatPrice(percentDiscountAmount)}</span>
           </div>
         )}
 
         {!appliedCoupon && promoPercent > 0 && percentDiscountAmount > 0 && (
-          <div className="flex justify-between items-center text-emerald-700 font-semibold">
-            <span>Descuento promoción ({bannerPromoRaw} - {promoPercent}%):</span>
-            <span className="tabular-nums">-{formatPrice(percentDiscountAmount)}</span>
+          <div className="flex justify-between items-center text-emerald-700 font-semibold gap-2 whitespace-nowrap">
+            <span className="truncate whitespace-nowrap">Descuento promoción ({bannerPromoRaw} - {promoPercent}%):</span>
+            <span className="tabular-nums shrink-0 whitespace-nowrap">-{formatPrice(percentDiscountAmount)}</span>
           </div>
         )}
 
         {deliveryType === 'delivery' && (
-          <div className="flex justify-between items-center">
-            <span className="text-stone-500">
+          <div className="flex justify-between items-center gap-2 whitespace-nowrap">
+            <span className="text-stone-500 truncate whitespace-nowrap">
               Costo de envío {selectedZoneObj ? `(${selectedZoneObj['Nombre de la Zona']})` : ''}:
             </span>
-            <span className="font-bold text-stone-900 tabular-nums">
+            <span className="font-bold text-stone-900 tabular-nums shrink-0 whitespace-nowrap">
               {isFreeShippingActive ? (
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 whitespace-nowrap">
                   {selectedZoneObj && selectedZoneObj.Costo > 0 && (
                     <span className="line-through text-stone-400 font-normal">
                       +{formatPrice(selectedZoneObj.Costo)}
                     </span>
                   )}
-                  <span className="text-emerald-700 font-bold">Gratis</span>
+                  <span className="text-emerald-700 font-bold whitespace-nowrap">Gratis</span>
                 </span>
               ) : selectedZoneObj ? (
                 deliveryFee > 0 ? (
@@ -99,7 +99,7 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
                   'Sin cargo'
                 )
               ) : (
-                <span className="text-stone-400 font-normal italic">A seleccionar zona</span>
+                <span className="text-stone-400 font-normal italic whitespace-nowrap">A seleccionar zona</span>
               )}
             </span>
           </div>

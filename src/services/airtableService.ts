@@ -165,9 +165,18 @@ export async function getConfiguracion(): Promise<ConfigData | null> {
       ''
     ).trim();
 
-    const localAbierto = checkAvailability(
-      fields['Local Abierto'] ?? fields.Abierto ?? fields.localAbierto ?? true
-    );
+    const rawLocalAbierto =
+      fields['Local Abierto'] ??
+      fields['Local abierto'] ??
+      fields['Local Abierto / Cerrado'] ??
+      fields['Abierto'] ??
+      fields['abierto'] ??
+      fields['Estado del Local'] ??
+      fields['Estado del local'] ??
+      fields['Estado'] ??
+      fields.localAbierto;
+
+    const localAbierto = checkAvailability(rawLocalAbierto);
 
     const soloTakeaway = checkAvailability(
       fields['Solo Takeaway (Modo Lluvia)'] ??

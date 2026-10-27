@@ -69,11 +69,11 @@ export const CartItemList: React.FC<CartItemListProps> = ({
                 )}
               </div>
 
-              {/* Badge si tiene bonificación activa */}
+              {/* Badge si tiene bonificación activa (1 sola línea, sin saltos) */}
               {isDiscountedItem && (
-                <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-semibold mt-1">
+                <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-semibold mt-1 whitespace-nowrap max-w-full overflow-hidden">
                   <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600 shrink-0" />
-                  <span>{productPromo.badgeText}</span>
+                  <span className="truncate whitespace-nowrap">{productPromo.badgeText}</span>
                 </div>
               )}
             </div>

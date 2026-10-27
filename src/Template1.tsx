@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
-import { Toaster } from 'sonner';
+import { Toaster, toast } from 'sonner';
+import { Sparkles } from 'lucide-react';
 
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/layout/Navbar';
@@ -128,6 +129,17 @@ export default function Template1() {
   const [searchQuery, setSearchQuery] = useState('');
   const bannerText = configuracion?.['Banner Promocional'] || '';
 
+  const localAbierto = configuracion
+    ? Boolean(configuracion['Local Abierto'] ?? configuracion.localAbierto)
+    : true;
+
+  const horariosAtencion = configuracion?.['Horarios de Atención'] || configuracion?.horariosAtencion || 'Martes a Domingo: 19:30 a 00:00 hs';
+  const physicalAddress =
+    configuracion?.['Dirección'] ||
+    configuracion?.['Direccion'] ||
+    configuracion?.direccion ||
+    'Av. de Mayo 1234 · Salón';
+
   // CATEGORÍAS Y CATEGORÍA ACTIVA
   const categories = useMemo(() => liveData.menu.categories || [], [liveData.menu.categories]);
   const [activeCategory, setActiveCategory] = useState<string>('');
@@ -147,8 +159,14 @@ export default function Template1() {
     }
   };
 
-  // Agregar al carrito
+  // Agregar al carrito (bloqueado si el local se encuentra cerrado)
   const addToCart = useCallback((product: MenuItem) => {
+    if (!localAbierto) {
+      toast.error('El local se encuentra cerrado momentáneamente. No se pueden realizar pedidos en este momento.', {
+        duration: 3500,
+      });
+      return;
+    }
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
       if (existingProduct) {
@@ -158,10 +176,11 @@ export default function Template1() {
       }
       return [...prevCart, { ...product, quantity: 1 }];
     });
-  }, []);
+  }, [localAbierto]);
 
   // Modificar cantidades
   const updateQuantity = useCallback((id: string, amount: number) => {
+    if (!localAbierto && amount > 0) return;
     setCart((prevCart) => {
       return prevCart.flatMap((item) => {
         if (item.id === id) {
@@ -171,7 +190,7 @@ export default function Template1() {
         return [item];
       });
     });
-  }, []);
+  }, [localAbierto]);
 
   const removeProduct = useCallback((id: string) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
@@ -217,17 +236,6 @@ export default function Template1() {
     onDeliveryTypeChange: setDeliveryType,
   });
 
-  const localAbierto = configuracion
-    ? Boolean(configuracion['Local Abierto'] ?? configuracion.localAbierto)
-    : true;
-
-  const horariosAtencion = configuracion?.['Horarios de Atención'] || configuracion?.horariosAtencion || 'Martes a Domingo: 19:30 a 00:00 hs';
-  const physicalAddress =
-    configuracion?.['Dirección'] ||
-    configuracion?.['Direccion'] ||
-    configuracion?.direccion ||
-    'Av. de Mayo 1234 · Salón';
-
   return (
     <div className="min-h-screen bg-[#F4F5F7] text-[#18181B] font-sans antialiased">
       {/* ============================================================== */}
@@ -259,6 +267,26 @@ export default function Template1() {
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
         />
+
+        {/* BANNER PROMOCIONAL LIMPIO DEBAJO DE LA NAVBAR */}
+        {bannerText && bannerText.trim() && (
+          <div className="w-full bg-[#FAF1ED] border-y border-[#EADBD5]/80 py-2 px-4 select-none">
+            <div className="max-w-[1320px] mx-auto flex items-center justify-center gap-2 text-xs sm:text-[13px]">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#D9532F]/10 text-[#D9532F] shrink-0">
+                <Sparkles className="w-3.5 h-3.5 stroke-[2.2]" />
+              </span>
+              <span className="bg-[#D9532F] text-white text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider shrink-0 shadow-2xs">
+                Promo activa
+              </span>
+              <span className="font-semibold text-stone-900 tracking-tight truncate">
+                {bannerText.trim()}
+              </span>
+              <span className="hidden md:inline text-[11px] text-stone-500 font-medium">
+                · Se aplica directo en tu pedido
+              </span>
+            </div>
+          </div>
+        )}
 
         <CategoryNav
           categories={categories}

@@ -28,18 +28,18 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-bold text-emerald-800 flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5 inline" /> Envío 100% Bonificado
+              <span className="text-[11px] font-bold text-emerald-800 flex items-center gap-1 whitespace-nowrap">
+                <CheckCircle2 className="w-3.5 h-3.5 inline shrink-0" /> Envío 100% Bonificado
               </span>
             </div>
-            <p className="text-xs text-stone-600 truncate font-medium mt-0.5">
+            <p className="text-xs text-stone-600 truncate font-medium mt-0.5 whitespace-nowrap">
               {isFreeShippingActive && selectedZoneCost > 0
                 ? `¡Ahorrás ${formatPrice(selectedZoneCost)} en el delivery!`
                 : 'Promoción de entrega sin cargo aplicada a tu pedido'}
             </p>
           </div>
         </div>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 tabular-nums shrink-0">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 tabular-nums shrink-0 whitespace-nowrap">
           Envío $0
         </span>
       </div>
@@ -72,20 +72,20 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
             </div>
             <div className="min-w-0">
               <span
-                className={`text-[11px] font-semibold tracking-tight block truncate ${
+                className={`text-[11px] font-semibold tracking-tight block truncate whitespace-nowrap ${
                   isUnlocked ? 'text-emerald-800' : 'text-[#D9532F]'
                 }`}
               >
                 {isUnlocked ? '¡Promo desbloqueada!' : 'Promoción en progreso'}
               </span>
-              <p className="text-xs text-stone-600 font-medium truncate">
+              <p className="text-xs text-stone-600 font-medium truncate whitespace-nowrap">
                 {productPromo.motivationalText || productPromo.statusText}
               </p>
             </div>
           </div>
 
           <span
-            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 border tabular-nums ${
+            className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 border tabular-nums whitespace-nowrap ${
               isUnlocked
                 ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
                 : 'bg-[#FAF1ED] text-[#D9532F] border border-[#EADBD5]'
@@ -119,15 +119,15 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
             <Sparkles className="w-4 h-4 text-[#D9532F]" />
           </div>
           <div className="min-w-0">
-            <span className="text-[11px] font-bold text-[#D9532F] flex items-center gap-1">
+            <span className="text-[11px] font-bold text-[#D9532F] flex items-center gap-1 whitespace-nowrap">
               {bannerPromo.discountPercent}% OFF Especial
             </span>
-            <p className="text-xs text-stone-600 truncate font-medium">
+            <p className="text-xs text-stone-600 truncate font-medium whitespace-nowrap">
               Descuento aplicado automáticamente en tu pedido
             </p>
           </div>
         </div>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-[#D9532F] border border-[#EADBD5] tabular-nums shrink-0">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-[#D9532F] border border-[#EADBD5] tabular-nums shrink-0 whitespace-nowrap">
           {bannerPromo.discountPercent}% OFF
         </span>
       </div>

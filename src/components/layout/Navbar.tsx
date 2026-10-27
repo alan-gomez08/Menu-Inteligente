@@ -90,16 +90,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="relative flex h-2 w-2 shrink-0">
-                {localAbierto && (
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                {localAbierto ? (
+                  <>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                  </>
+                ) : (
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
                 )}
-                <span
-                  className={`relative inline-flex rounded-full h-2 w-2 ${
-                    localAbierto ? 'bg-emerald-500' : 'bg-rose-500'
-                  }`}
-                />
               </span>
-              <span className={`text-[11px] font-medium ${localAbierto ? 'text-emerald-700' : 'text-rose-600'}`}>
+              <span className={`text-[11px] font-bold ${localAbierto ? 'text-emerald-700' : 'text-red-600'}`}>
                 {localAbierto ? 'Abierto' : 'Cerrado'}
               </span>
               {horariosAtencion && (
@@ -146,6 +146,23 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             </>
           )}
+
+          {/* Badge de estado del local en Mobile */}
+          <div className="flex items-center gap-1 mt-0.5 select-none">
+            <span className="relative flex h-1.5 w-1.5 shrink-0">
+              {localAbierto ? (
+                <>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                </>
+              ) : (
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+              )}
+            </span>
+            <span className={`text-[10px] font-bold ${localAbierto ? 'text-emerald-700' : 'text-red-600'}`}>
+              {localAbierto ? 'Abierto' : 'Cerrado'}
+            </span>
+          </div>
         </div>
 
         {/* ============================================================ */}

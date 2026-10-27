@@ -84,7 +84,7 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
             </div>
 
             {hasItems && (
-              <span className="text-xs font-bold text-[#D9532F] bg-[#FAF1ED] border border-[#EADBD5] px-2.5 py-1 rounded-full tabular-nums font-sans">
+              <span className="text-xs font-bold text-[#D9532F] bg-[#FAF1ED] border border-[#EADBD5] px-2.5 py-1 rounded-full tabular-nums font-sans whitespace-nowrap shrink-0">
                 {formatPrice(checkout.total)}
               </span>
             )}
@@ -153,7 +153,7 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-stone-800 font-sans">¿Cómo lo recibís?</span>
                   {checkout.soloTakeaway && (
-                    <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 font-sans">
+                    <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 font-sans whitespace-nowrap shrink-0">
                       Modo lluvia
                     </span>
                   )}
@@ -276,35 +276,35 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
                   <span className="font-semibold text-stone-800 tabular-nums">{formatPrice(checkout.subtotal)}</span>
                 </div>
                 {checkout.productPromo && checkout.productDiscountAmount > 0 && (
-                  <div className="flex justify-between items-center text-emerald-700 font-semibold">
-                    <span>Descuento {checkout.productPromo.description}:</span>
-                    <span className="tabular-nums">-{formatPrice(checkout.productDiscountAmount)}</span>
+                  <div className="flex justify-between items-center text-emerald-700 font-semibold gap-2 whitespace-nowrap">
+                    <span className="truncate whitespace-nowrap">Descuento {checkout.productPromo.description}:</span>
+                    <span className="tabular-nums shrink-0 whitespace-nowrap">-{formatPrice(checkout.productDiscountAmount)}</span>
                   </div>
                 )}
                 {checkout.appliedCoupon && checkout.percentDiscountAmount > 0 && (
-                  <div className="flex justify-between items-center text-emerald-700 font-semibold">
-                    <span>Cupón ({checkout.appliedCoupon.code}):</span>
-                    <span className="tabular-nums">-{formatPrice(checkout.percentDiscountAmount)}</span>
+                  <div className="flex justify-between items-center text-emerald-700 font-semibold gap-2 whitespace-nowrap">
+                    <span className="truncate whitespace-nowrap">Cupón ({checkout.appliedCoupon.code}):</span>
+                    <span className="tabular-nums shrink-0 whitespace-nowrap">-{formatPrice(checkout.percentDiscountAmount)}</span>
                   </div>
                 )}
                 {!checkout.appliedCoupon && checkout.bannerPromo?.discountPercent > 0 && checkout.percentDiscountAmount > 0 && (
-                  <div className="flex justify-between items-center text-emerald-700 font-semibold">
-                    <span>Descuento promo ({checkout.bannerPromo.discountPercent}%):</span>
-                    <span className="tabular-nums">-{formatPrice(checkout.percentDiscountAmount)}</span>
+                  <div className="flex justify-between items-center text-emerald-700 font-semibold gap-2 whitespace-nowrap">
+                    <span className="truncate whitespace-nowrap">Descuento promo ({checkout.bannerPromo.discountPercent}%):</span>
+                    <span className="tabular-nums shrink-0 whitespace-nowrap">-{formatPrice(checkout.percentDiscountAmount)}</span>
                   </div>
                 )}
                 {checkout.deliveryType === 'delivery' && (
-                  <div className="flex justify-between items-center">
-                    <span className="text-stone-500">
+                  <div className="flex justify-between items-center gap-2 whitespace-nowrap">
+                    <span className="text-stone-500 truncate whitespace-nowrap">
                       Costo de envío {checkout.selectedZoneObj ? `(${checkout.selectedZoneObj['Nombre de la Zona']})` : ''}:
                     </span>
-                    <span className="font-semibold text-stone-800 tabular-nums">
+                    <span className="font-semibold text-stone-800 tabular-nums shrink-0 whitespace-nowrap">
                       {checkout.isFreeShippingActive ? (
-                        <span className="text-emerald-700 font-bold">Gratis</span>
+                        <span className="text-emerald-700 font-bold whitespace-nowrap">Gratis</span>
                       ) : checkout.selectedZoneObj ? (
                         checkout.deliveryFee > 0 ? `+${formatPrice(checkout.deliveryFee)}` : 'Sin cargo'
                       ) : (
-                        <span className="text-stone-400 font-normal italic">A seleccionar zona</span>
+                        <span className="text-stone-400 font-normal italic whitespace-nowrap">A seleccionar zona</span>
                       )}
                     </span>
                   </div>

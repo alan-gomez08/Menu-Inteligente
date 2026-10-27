@@ -96,7 +96,7 @@ export const CartContent: React.FC<CartContentProps> = ({
             ¿Cómo lo recibís?
           </span>
           {checkout.soloTakeaway && (
-            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 whitespace-nowrap shrink-0">
               Modo lluvia activo
             </span>
           )}
@@ -130,7 +130,7 @@ export const CartContent: React.FC<CartContentProps> = ({
               <Bike className="w-3.5 h-3.5 text-[#D9532F]" />
               <span>Delivery</span>
               {checkout.isFreeShippingActive && (
-                <span className="text-[9px] font-black uppercase bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded ml-1 border border-emerald-200">
+                <span className="text-[9px] font-black uppercase bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded ml-1 border border-emerald-200 whitespace-nowrap shrink-0">
                   Gratis
                 </span>
               )}
