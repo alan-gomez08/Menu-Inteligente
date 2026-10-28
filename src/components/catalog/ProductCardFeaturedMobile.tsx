@@ -37,7 +37,10 @@ export const ProductCardFeaturedMobile: React.FC<ProductCardFeaturedMobileProps>
             <img
               src={normalizeImageUrl(item.imagePath)}
               alt={item.title}
+              width="230"
+              height="132"
               loading="lazy"
+              decoding="async"
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageError(true)}
               className={`h-full w-full object-contain drop-shadow-sm transition-transform duration-300 ${

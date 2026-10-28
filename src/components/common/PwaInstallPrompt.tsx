@@ -200,6 +200,7 @@ export const PwaInstallPrompt: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowIOSGuide(false)}
+                  aria-label="Cerrar instrucciones de instalación"
                   className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-500 flex items-center justify-center transition cursor-pointer"
                 >
                   <X className="w-4 h-4 stroke-[2.2]" />

@@ -296,6 +296,7 @@ export default function Template1() {
               {/* Botón de acción con color destacado terracota */}
               <button
                 type="button"
+                aria-label="Aprovechar promoción de la carta"
                 onClick={() => {
                   const el = document.getElementById('hamburguesas') || document.querySelector('main');
                   el?.scrollIntoView({ behavior: 'smooth' });

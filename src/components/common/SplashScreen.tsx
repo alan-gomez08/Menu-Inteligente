@@ -243,6 +243,8 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({
             <img
               src={logoUrl}
               alt={businessName || 'Logo'}
+              width="192"
+              height="192"
               className="w-full h-full object-contain"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = 'none';

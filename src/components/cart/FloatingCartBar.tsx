@@ -59,6 +59,7 @@ export const FloatingCartBar: React.FC<FloatingCartBarProps> = ({
                 e.stopPropagation();
                 onOpenCart();
               }}
+              aria-label="Ver pedido en el carrito"
               className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#D9532F] hover:bg-[#BF4321] text-white font-semibold text-xs sm:text-sm shadow-md shadow-[#D9532F]/25 transition-all active:scale-95 cursor-pointer shrink-0"
             >
               <span>Ver Pedido</span>

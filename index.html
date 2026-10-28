@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets-t1/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="description" content="Menú digital inteligente interactivo con pedidos por WhatsApp, delivery y takeaway." />
+    <meta name="description" content="Menú digital gastronómico interactivo con pedidos directos por WhatsApp, delivery y takeaway." />
+
+    <!-- Open Graph / Redes Sociales y Compartir -->
+    <meta property="og:title" content="Menú Inteligente | Carta Digital Gastronómica" />
+    <meta property="og:description" content="Carta digital interactiva con pedidos por WhatsApp, delivery y takeaway." />
+    <meta property="og:image" content="/icons/icon-512x512.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
 
     <!-- PWA Web App Manifest & Configuración Mobile -->
     <link rel="manifest" href="/manifest.json" />
@@ -24,10 +31,26 @@
     <meta name="msapplication-TileImage" content="/icons/icon-192x192.png" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- Google Fonts: Poppins, Plus Jakarta Sans & Inter -->
+    <!-- Google Fonts: Precarga asíncrona sin bloqueo de renderizado -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
 
     <title>Menú Inteligente | Carta Digital Gastronómica</title>
   </head>

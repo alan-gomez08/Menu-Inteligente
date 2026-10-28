@@ -36,7 +36,10 @@ export const ProductCardCompact: React.FC<ProductCardCompactProps> = ({
           <img
             src={normalizeImageUrl(item.imagePath)}
             alt={item.title}
+            width="104"
+            height="104"
             loading="lazy"
+            decoding="async"
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
             className={`w-full h-full object-contain scale-[1.14] drop-shadow-sm group-hover:scale-[1.20] transition-transform duration-300 ease-out ${

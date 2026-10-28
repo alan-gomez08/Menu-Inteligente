@@ -36,7 +36,10 @@ export const ProductCardBeverage: React.FC<ProductCardBeverageProps> = ({
           <img
             src={normalizeImageUrl(item.imagePath)}
             alt={item.title}
+            width="80"
+            height="80"
             loading="lazy"
+            decoding="async"
             onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
             className={`w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 ease-out ${

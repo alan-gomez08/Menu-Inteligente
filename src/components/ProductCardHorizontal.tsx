@@ -36,10 +36,13 @@ export const ProductCardHorizontal: React.FC<ProductCardHorizontalProps> = ({
           <img
             src={normalizeImageUrl(item.imagePath)}
             alt={item.title}
+            width="112"
+            height="112"
             className={`w-full h-full aspect-square object-cover rounded-xl transition-transform duration-300 group-hover:scale-105 ${
               isSoldOut ? 'grayscale opacity-50' : ''
             }`}
             loading="lazy"
+            decoding="async"
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).style.display = 'none';
             }}

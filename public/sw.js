@@ -12,7 +12,9 @@ const PRECACHE_ASSETS = [
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
   '/icons/apple-touch-icon.png',
-  '/icons/maskable-icon-512x512.png'
+  '/icons/maskable-icon-192x192.png',
+  '/icons/maskable-icon-512x512.png',
+  '/robots.txt'
 ];
 
 // Instalación: Pre-cacheados de la estructura básica del menú
@@ -100,3 +102,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+

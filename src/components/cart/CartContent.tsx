@@ -142,10 +142,12 @@ export const CartContent: React.FC<CartContentProps> = ({
         {checkout.deliveryType === 'delivery' && !checkout.soloTakeaway && (
           <div className="space-y-2.5 pt-1">
             <div>
-              <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+              <label htmlFor="mobile-delivery-zone" className="text-[11px] font-semibold text-stone-600 block mb-1">
                 Zona de entrega
               </label>
               <select
+                id="mobile-delivery-zone"
+                aria-label="Zona de entrega"
                 ref={zoneSelectRef}
                 value={checkout.zone}
                 onChange={(e) => checkout.setZone(e.target.value)}
@@ -165,10 +167,12 @@ export const CartContent: React.FC<CartContentProps> = ({
             </div>
 
             <div>
-              <label className="text-[11px] font-semibold text-stone-600 block mb-1">
+              <label htmlFor="mobile-delivery-address" className="text-[11px] font-semibold text-stone-600 block mb-1">
                 Dirección exacta
               </label>
               <input
+                id="mobile-delivery-address"
+                aria-label="Dirección exacta de entrega"
                 ref={addressInputRef}
                 type="text"
                 value={checkout.address}
@@ -233,6 +237,8 @@ export const CartContent: React.FC<CartContentProps> = ({
 
         <form onSubmit={checkout.handleApplyCoupon} className="flex gap-2">
           <input
+            id="mobile-coupon-input"
+            aria-label="Código de cupón de descuento"
             type="text"
             value={checkout.couponInput}
             onChange={(e) => checkout.setCouponInput(e.target.value)}

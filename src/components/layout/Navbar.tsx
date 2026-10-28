@@ -63,7 +63,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {logoUrl ? (
             <img
               src={logoUrl}
-              alt={businessName}
+              alt={businessName || 'Logotipo'}
+              width="160"
+              height="40"
               className="h-10 w-auto max-w-[170px] object-contain shrink-0"
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
@@ -118,7 +120,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {logoUrl ? (
             <img
               src={logoUrl}
-              alt={businessName}
+              alt={businessName || 'Logotipo'}
+              width="128"
+              height="32"
               className="h-8 max-h-8 w-auto max-w-[150px] object-contain"
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
@@ -167,10 +171,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative w-full">
             <Search className="w-3.5 h-3.5 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
+              id="desktop-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Buscar plato o bebida..."
+              aria-label="Buscar plato o bebida en la carta"
               className="w-full pl-9 pr-8 py-1.5 rounded-full bg-stone-100/80 hover:bg-stone-100 focus:bg-white border border-stone-200/70 text-stone-900 text-xs outline-none focus:border-[#D9532F] focus:ring-1 focus:ring-[#D9532F]/20 placeholder:text-stone-400 transition-all shadow-2xs"
             />
             {searchQuery && (
@@ -219,10 +225,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative">
             <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
+              id="mobile-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Buscar en el menú..."
+              aria-label="Buscar productos en el menú"
               autoFocus
               className="w-full pl-9 pr-8 py-2 rounded-xl bg-white border border-stone-200 text-stone-900 text-xs outline-none focus:border-[#D9532F] focus:ring-1 focus:ring-[#D9532F]/20 placeholder:text-stone-400 transition-colors shadow-2xs"
             />
@@ -231,6 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 type="button"
                 onClick={() => onSearchChange('')}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition cursor-pointer"
+                aria-label="Limpiar búsqueda"
               >
                 <X className="w-3.5 h-3.5" />
               </button>

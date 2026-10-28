@@ -200,6 +200,8 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
                 {checkout.deliveryType === 'delivery' && !checkout.soloTakeaway && (
                   <div className="space-y-2 pt-1">
                     <select
+                      id="desktop-delivery-zone"
+                      aria-label="Zona de entrega"
                       ref={zoneSelectRef}
                       value={checkout.zone}
                       onChange={(e) => checkout.setZone(e.target.value)}
@@ -218,6 +220,8 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
                     </select>
 
                     <input
+                      id="desktop-delivery-address"
+                      aria-label="Dirección de entrega"
                       ref={addressInputRef}
                       type="text"
                       value={checkout.address}
@@ -293,6 +297,8 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
                   className="flex gap-2"
                 >
                   <input
+                    id="desktop-coupon-input"
+                    aria-label="Código de cupón de descuento"
                     type="text"
                     value={checkout.couponInput}
                     onChange={(e) => checkout.setCouponInput(e.target.value)}

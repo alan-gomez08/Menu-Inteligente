@@ -56,6 +56,8 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
           {/* Scroll horizontal estrictamente confinado dentro del ancho útil de las tarjetas de productos */}
           <div
             ref={containerRef}
+            role="tablist"
+            aria-label="Categorías de la carta"
             className="relative flex items-center gap-2 sm:gap-2.5 overflow-x-auto scrollbar-none hide-scrollbar scroll-smooth overscroll-x-contain"
           >
             {categories.map((cat) => {
@@ -65,6 +67,8 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
                   key={cat}
                   ref={isActive ? activeTabRef : null}
                   type="button"
+                  role="tab"
+                  aria-selected={isActive}
                   onClick={() => onSelectCategory(cat)}
                   className={`relative isolate shrink-0 px-4 sm:px-4.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-[13px] font-semibold tracking-tight transition-all cursor-pointer whitespace-nowrap font-sans ${
                     isActive

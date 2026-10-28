@@ -212,7 +212,10 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                               <img
                                 src={normalizeImageUrl(item.imagePath)}
                                 alt={item.title}
+                                width="230"
+                                height="172"
                                 loading="lazy"
+                                decoding="async"
                                 onError={(e) => {
                                   const target = e.currentTarget as HTMLImageElement;
                                   target.style.display = 'none';

@@ -91,8 +91,11 @@ export const UpsellRow: React.FC<UpsellRowProps> = ({
                   <img
                     src={normalizeImageUrl(item.imagePath)}
                     alt={item.title}
+                    width="36"
+                    height="36"
                     className="w-full h-full object-contain"
                     loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).style.display = 'none';
                     }}

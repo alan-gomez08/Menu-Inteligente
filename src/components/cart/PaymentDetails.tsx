@@ -39,6 +39,7 @@ export const PaymentDetails: React.FC<PaymentDetailsProps> = ({
           <button
             type="button"
             onClick={onCopyAlias}
+            aria-label="Copiar alias bancario al portapapeles"
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-all cursor-pointer active:scale-95 shrink-0 border ${
               copiedAlias
                 ? 'bg-emerald-50 text-emerald-800 border-emerald-200'

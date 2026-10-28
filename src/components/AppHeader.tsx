@@ -32,7 +32,9 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           {logoUrl ? (
             <img
               src={logoUrl}
-              alt={businessName}
+              alt={businessName || 'Logotipo'}
+              width="44"
+              height="44"
               className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl object-cover shrink-0 ring-1 ring-white/10 shadow-lg shadow-black/40"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).style.display = 'none';

@@ -52,7 +52,9 @@ export const SidebarDesktop: React.FC<SidebarDesktopProps> = ({
           {logoUrl ? (
             <img
               src={logoUrl}
-              alt={businessName}
+              alt={businessName || 'Logotipo'}
+              width="130"
+              height="40"
               className="h-10 w-auto max-w-[130px] rounded-xl object-contain ring-1 ring-stone-200/70 shadow-xs shrink-0"
               onError={(e) => {
                 const target = e.currentTarget as HTMLImageElement;
@@ -152,10 +154,12 @@ export const SidebarDesktop: React.FC<SidebarDesktopProps> = ({
         <div className="relative">
           <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
+            id="sidebar-search-input"
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Buscar en la carta..."
+            aria-label="Buscar en la carta"
             className="w-full pl-9 pr-8 py-2 rounded-xl bg-stone-100 border border-transparent text-stone-900 text-xs outline-none focus:bg-white focus:border-[#D9532F]/40 placeholder:text-stone-400 transition-colors shadow-xs"
           />
           {searchQuery && (
@@ -163,6 +167,7 @@ export const SidebarDesktop: React.FC<SidebarDesktopProps> = ({
               type="button"
               onClick={() => onSearchChange('')}
               className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition cursor-pointer"
+              aria-label="Limpiar búsqueda"
             >
               <X className="w-3.5 h-3.5" />
             </button>

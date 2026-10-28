@@ -37,7 +37,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <img
               src={normalizeImageUrl(item.imagePath)}
               alt={item.title}
+              width="240"
+              height="196"
               loading="lazy"
+              decoding="async"
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageError(true)}
               className={`h-full w-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300 ease-out ${
