@@ -64,9 +64,9 @@ export const ProductCardBeverage: React.FC<ProductCardBeverageProps> = ({
       {/* 2. Textos centrales: Nombre, descripción y precio */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <h4 className="font-semibold text-sm text-stone-900 group-hover:text-[#D9532F] transition-colors truncate tracking-tight leading-snug">
+          <h3 className="font-semibold text-sm text-stone-900 group-hover:text-[#D9532F] transition-colors truncate tracking-tight leading-snug">
             {item.title}
-          </h4>
+          </h3>
           {(() => {
             const badgeConfig = getBadgeConfig(item.badge);
             if (!badgeConfig || isSoldOut) return null;
@@ -84,7 +84,7 @@ export const ProductCardBeverage: React.FC<ProductCardBeverageProps> = ({
             {item.description}
           </p>
         )}
-        <span className="block text-sm font-bold tabular-nums text-[#D9532F] mt-1 tracking-tight">
+        <span className="block text-sm font-bold tabular-nums text-[#C23E1C] mt-1 tracking-tight">
           {item.price}
         </span>
       </div>

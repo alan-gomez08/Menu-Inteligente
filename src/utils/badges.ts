@@ -18,7 +18,7 @@ export const getBadgeConfig = (rawBadge?: string): BadgeConfig | null => {
   ) {
     return {
       text: '🔥 Popular',
-      className: 'bg-[#FAF1ED] text-[#D9532F] font-semibold border border-[#EADBD5]/80',
+      className: 'bg-[#FAF1ED] text-[#C23E1C] font-semibold border border-[#EADBD5]/80',
     };
   }
 
@@ -76,7 +76,7 @@ export const getBadgeConfig = (rawBadge?: string): BadgeConfig | null => {
   // Fallback con el texto personalizado
   return {
     text: rawBadge,
-    className: 'bg-[#FAF1ED] text-[#D9532F] font-semibold border border-[#EADBD5]/80',
+    className: 'bg-[#FAF1ED] text-[#C23E1C] font-semibold border border-[#EADBD5]/80',
   };
 };
 

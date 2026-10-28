@@ -73,7 +73,7 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({
                   className={`relative isolate shrink-0 px-4 sm:px-4.5 py-1.5 sm:py-2 rounded-xl text-xs sm:text-[13px] font-semibold tracking-tight transition-all cursor-pointer whitespace-nowrap font-sans ${
                     isActive
                       ? 'text-white bg-[#D9532F] shadow-xs'
-                      : 'text-stone-600 hover:text-stone-900 bg-stone-100/90 hover:bg-stone-200/80 border border-stone-200/60'
+                      : 'text-stone-700 hover:text-stone-900 bg-stone-100/90 hover:bg-stone-200/80 border border-stone-200/60'
                   }`}
                 >
                   {isActive && (

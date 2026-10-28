@@ -93,7 +93,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* 3. Fila Inferior: Precios y botón alineados con altura estricta inalterable (56px) */}
       <div className="mt-auto border-t border-stone-100 flex items-center justify-between shrink-0 h-14 min-h-[56px] max-h-[56px] box-border">
         <div className="h-9 min-h-[36px] max-h-[36px] flex items-center shrink-0">
-          <span className="text-base sm:text-lg font-bold tabular-nums text-[#D9532F] leading-none tracking-tight font-sans">
+          <span className="text-base sm:text-lg font-bold tabular-nums text-[#C23E1C] leading-none tracking-tight font-sans">
             {item.price}
           </span>
         </div>

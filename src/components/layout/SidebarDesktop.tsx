@@ -74,9 +74,9 @@ export const SidebarDesktop: React.FC<SidebarDesktopProps> = ({
           )}
 
           <div className="min-w-0">
-            <h1 className="text-stone-900 font-bold text-base tracking-tight truncate leading-tight">
+            <p className="text-stone-900 font-bold text-base tracking-tight truncate leading-tight">
               {businessName || 'Menú Inteligente'}
-            </h1>
+            </p>
             <span className="text-[11px] text-stone-500 font-medium">Carta digital</span>
           </div>
         </div>

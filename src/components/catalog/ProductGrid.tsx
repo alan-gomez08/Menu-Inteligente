@@ -194,7 +194,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
               <>
                 {/* Mobile (< 1024px): Carrusel Horizontal Swipeable de Alto Impacto */}
                 <div className="lg:hidden -mx-5 sm:-mx-6 px-5 sm:px-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-3 pt-1 overscroll-x-contain flex gap-3.5">
-                  {categoryItems.map((item) => {
+                  {categoryItems.map((item, itemIdx) => {
                     const cartItem = cart.find((c) => c.id === item.id);
                     const quantity = cartItem ? cartItem.quantity : 0;
                     const badgeConfig = getBadgeConfig(item.badge);
@@ -214,7 +214,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                                 alt={item.title}
                                 width="230"
                                 height="172"
-                                loading="lazy"
+                                loading={itemIdx === 0 ? 'eager' : 'lazy'}
+                                fetchPriority={itemIdx === 0 ? 'high' : 'auto'}
                                 decoding="async"
                                 onError={(e) => {
                                   const target = e.currentTarget as HTMLImageElement;
@@ -256,9 +257,9 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
                         {/* Información del Plato */}
                         <div className="flex-1 min-w-0 pb-2">
-                          <h4 className="font-bold text-[15px] text-stone-900 group-hover:text-[#D9532F] transition-colors line-clamp-1 tracking-tight leading-snug">
+                          <h3 className="font-bold text-[15px] text-stone-900 group-hover:text-[#D9532F] transition-colors line-clamp-1 tracking-tight leading-snug">
                             {item.title}
-                          </h4>
+                          </h3>
                           {item.description && (
                             <p className="text-xs text-stone-500 line-clamp-2 mt-1 leading-relaxed">
                               {item.description}
@@ -268,7 +269,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
                         {/* Fila Inferior: Precio y Botón (+) / Stepper */}
                         <div className="flex items-center justify-between pt-2 border-t border-stone-100 mt-auto">
-                          <span className="text-base sm:text-[17px] font-bold tabular-nums text-[#D9532F] tracking-tight">
+                          <span className="text-base sm:text-[17px] font-bold tabular-nums text-[#C23E1C] tracking-tight">
                             {item.price}
                           </span>
 

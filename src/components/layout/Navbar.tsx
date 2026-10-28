@@ -42,6 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="w-full bg-white select-none border-b border-stone-100 pt-[max(env(safe-area-inset-top,0px),12px)] sm:pt-[env(safe-area-inset-top,0px)]">
       <div className="max-w-[1320px] mx-auto px-5 sm:px-6 lg:px-6 h-14 sm:h-16 flex items-center justify-between gap-4">
+        {/* Título de nivel 1 accesible para SEO y árbol de accesibilidad */}
+        <h1 className="sr-only">{businessName || 'Menú Inteligente - Carta Digital'}</h1>
         {/* ============================================================ */}
         {/* VISTA MOBILE: Menú hamburguesa (Izquierda)                   */}
         {/* ============================================================ */}
@@ -79,16 +81,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
             />
           ) : (
-            <h1 className="font-semibold text-base sm:text-lg text-stone-900 tracking-tight truncate leading-tight font-sans">
+            <span className="font-semibold text-base sm:text-lg text-stone-900 tracking-tight truncate leading-tight font-sans">
               {businessName || 'Menú Inteligente'}
-            </h1>
+            </span>
           )}
 
           <div className="min-w-0 flex flex-col justify-center">
             {logoUrl && businessName && businessName !== 'Tu Logo' && (
-              <h1 className="font-semibold text-sm text-stone-900 tracking-tight truncate leading-tight font-sans">
+              <span className="font-semibold text-sm text-stone-900 tracking-tight truncate leading-tight font-sans">
                 {businessName}
-              </h1>
+              </span>
             )}
             <div className="flex items-center gap-1.5 mt-0.5">
               <span className="relative flex h-2 w-2 shrink-0">
@@ -105,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {localAbierto ? 'Abierto' : 'Cerrado'}
               </span>
               {horariosAtencion && (
-                <span className="text-[11px] text-stone-400 font-normal truncate max-w-[200px]">
+                <span className="text-[11px] text-stone-500 font-normal truncate max-w-[200px]">
                   · {horariosAtencion}
                 </span>
               )}
@@ -137,9 +139,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             />
           ) : (
             <>
-              <h1 className="font-bold text-base sm:text-lg text-stone-900 tracking-tight truncate max-w-[240px] text-center leading-snug font-sans">
+              <span className="font-bold text-base sm:text-lg text-stone-900 tracking-tight truncate max-w-[240px] text-center leading-snug font-sans">
                 {businessName || 'Our Menu'}
-              </h1>
+              </span>
               {/* Filigrana ornamental minimalista idéntica a la referencia */}
               <div className="flex items-center justify-center gap-1.5 mt-0.5 text-[#D9532F]">
                 <span className="h-[1px] w-6 bg-current opacity-40" />
@@ -280,7 +282,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <h2 className="font-bold text-base sm:text-lg text-stone-900 font-sans tracking-tight leading-tight">
                           {businessName || 'Nuestro Local'}
                         </h2>
-                        <span className="text-[11px] font-medium text-stone-400 font-sans">
+                        <span className="text-[11px] font-medium text-stone-500 font-sans">
                           Información y Contacto
                         </span>
                       </div>

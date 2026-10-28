@@ -86,7 +86,7 @@ export const CartDesktop: React.FC<CartDesktopProps> = ({
             </div>
 
             {hasItems && (
-              <span className="text-xs font-bold text-[#D9532F] bg-[#FAF1ED] border border-[#EADBD5] px-2.5 py-1 rounded-full tabular-nums font-sans whitespace-nowrap shrink-0">
+              <span className="text-xs font-bold text-[#C23E1C] bg-[#FAF1ED] border border-[#EADBD5] px-2.5 py-1 rounded-full tabular-nums font-sans whitespace-nowrap shrink-0">
                 {formatPrice(checkout.total)}
               </span>
             )}

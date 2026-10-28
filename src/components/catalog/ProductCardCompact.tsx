@@ -68,9 +68,9 @@ export const ProductCardCompact: React.FC<ProductCardCompactProps> = ({
       <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5 pr-10">
         <div>
           <div className="flex items-center gap-1.5">
-            <h4 className="font-semibold text-[15px] sm:text-base text-stone-900 group-hover:text-[#D9532F] transition-colors line-clamp-1 tracking-tight leading-snug">
+            <h3 className="font-semibold text-[15px] sm:text-base text-stone-900 group-hover:text-[#D9532F] transition-colors line-clamp-1 tracking-tight leading-snug">
               {item.title}
-            </h4>
+            </h3>
             {(() => {
               const badgeConfig = getBadgeConfig(item.badge);
               if (!badgeConfig || isSoldOut) return null;
@@ -93,7 +93,7 @@ export const ProductCardCompact: React.FC<ProductCardCompactProps> = ({
 
         {/* Precio en tono terracota elegante */}
         <div className="pt-2">
-          <span className="text-base sm:text-[17px] font-bold tabular-nums text-[#D9532F] tracking-tight">
+          <span className="text-base sm:text-[17px] font-bold tabular-nums text-[#C23E1C] tracking-tight">
             {item.price}
           </span>
         </div>

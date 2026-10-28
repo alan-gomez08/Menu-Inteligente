@@ -68,7 +68,7 @@ export const UpsellRow: React.FC<UpsellRowProps> = ({
         <span className="text-xs font-bold text-stone-800">
           ¿Agregamos una bebida o extra?
         </span>
-        <span className="text-[10px] text-[#D9532F] font-semibold bg-[#FAF1ED] px-2 py-0.5 rounded-full border border-[#EADBD5]">
+        <span className="text-[10px] text-[#C23E1C] font-semibold bg-[#FAF1ED] px-2 py-0.5 rounded-full border border-[#EADBD5]">
           1-Tap
         </span>
       </div>

@@ -153,7 +153,6 @@ export const OrderSummary: React.FC<OrderSummaryProps> = ({
             onClick={onSendOrder}
             disabled={!isOrderValid}
             whileTap={{ scale: 0.98 }}
-            aria-label="Enviar pedido por WhatsApp"
             className="relative group overflow-hidden w-full h-11 sm:h-12 rounded-xl bg-[#14532D] text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-md shadow-emerald-950/20 hover:shadow-lg hover:shadow-[#25D366]/30 active:scale-[0.98] transition-all duration-300 cursor-pointer font-sans"
           >
             {/* Capa de relleno que se pinta de izquierda a derecha al hacer hover con el verde brillante oficial de WhatsApp */}

@@ -61,7 +61,7 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
               className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
                 isUnlocked
                   ? 'bg-emerald-100 text-emerald-700 border border-emerald-200'
-                  : 'bg-[#FAF1ED] text-[#D9532F] border border-[#EADBD5]'
+                  : 'bg-[#FAF1ED] text-[#C23E1C] border border-[#EADBD5]'
               }`}
             >
               {isUnlocked ? (
@@ -73,7 +73,7 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
             <div className="min-w-0">
               <span
                 className={`text-[11px] font-semibold tracking-tight block truncate whitespace-nowrap ${
-                  isUnlocked ? 'text-emerald-800' : 'text-[#D9532F]'
+                  isUnlocked ? 'text-emerald-800' : 'text-[#C23E1C]'
                 }`}
               >
                 {isUnlocked ? '¡Promo desbloqueada!' : 'Promoción en progreso'}
@@ -88,7 +88,7 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
             className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 border tabular-nums whitespace-nowrap ${
               isUnlocked
                 ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
-                : 'bg-[#FAF1ED] text-[#D9532F] border border-[#EADBD5]'
+                : 'bg-[#FAF1ED] text-[#C23E1C] border border-[#EADBD5]'
             }`}
           >
             {isUnlocked ? '¡Aplicada!' : `${current}/${target}`}
@@ -99,7 +99,7 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
         {!isUnlocked && (
           <div className="w-full bg-stone-200 rounded-full h-1.5 overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-[#D9532F] to-[#E07A5F] rounded-full"
+              className="h-full bg-gradient-to-r from-[#C23E1C] to-[#E07A5F] rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${percentage}%` }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -116,10 +116,10 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
       <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#FAF1ED] via-stone-50 to-[#FAF1ED] border border-[#EADBD5] flex items-center justify-between text-xs shadow-xs">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-8 h-8 rounded-xl bg-white border border-[#EADBD5] flex items-center justify-center shrink-0">
-            <Sparkles className="w-4 h-4 text-[#D9532F]" />
+            <Sparkles className="w-4 h-4 text-[#C23E1C]" />
           </div>
           <div className="min-w-0">
-            <span className="text-[11px] font-bold text-[#D9532F] flex items-center gap-1 whitespace-nowrap">
+            <span className="text-[11px] font-bold text-[#C23E1C] flex items-center gap-1 whitespace-nowrap">
               {bannerPromo.discountPercent}% OFF Especial
             </span>
             <p className="text-xs text-stone-600 truncate font-medium whitespace-nowrap">
@@ -127,7 +127,7 @@ export const PromoProgressBar: React.FC<PromoProgressBarProps> = ({
             </p>
           </div>
         </div>
-        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-[#D9532F] border border-[#EADBD5] tabular-nums shrink-0 whitespace-nowrap">
+        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-[#C23E1C] border border-[#EADBD5] tabular-nums shrink-0 whitespace-nowrap">
           {bannerPromo.discountPercent}% OFF
         </span>
       </div>

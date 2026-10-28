@@ -135,9 +135,9 @@ export const PwaInstallPrompt: React.FC = () => {
 
               {/* Textos */}
               <div className="flex-1 min-w-0 pr-1">
-                <h4 className="font-bold text-xs sm:text-[13px] text-stone-900 leading-tight">
+                <p className="font-bold text-xs sm:text-[13px] text-stone-900 leading-tight">
                   Instalá nuestra App
-                </h4>
+                </p>
                 <p className="text-[11px] text-stone-500 leading-snug mt-0.5 truncate">
                   Accedé al menú al instante y sin esperas
                 </p>
