@@ -1,9 +1,28 @@
+import { useEffect } from 'react';
 import useSWR from 'swr';
 import { getMenuData } from '../services/airtableService';
 import type {
   MenuData,
   UseMenuDataReturn,
 } from '../types/airtable';
+
+const CACHE_KEY = 'menu_catalog_cache_v2';
+
+const getInitialCachedData = (): MenuData | undefined => {
+  if (typeof window === 'undefined') return undefined;
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.productos) && parsed.productos.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    // Ignore cache parse error
+  }
+  return undefined;
+};
 
 const fetcher = async (): Promise<MenuData> => {
   const token = import.meta.env.VITE_AIRTABLE_TOKEN;
@@ -12,14 +31,22 @@ const fetcher = async (): Promise<MenuData> => {
       'Falta configurar tu token VITE_AIRTABLE_TOKEN en el archivo .env.'
     );
   }
-  return await getMenuData();
+  const result = await getMenuData();
+  if (result && typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify(result));
+    } catch (e) {
+      // Ignore cache storage error
+    }
+  }
+  return result;
 };
 
 /**
  * Hook useMenuData optimizado con SWR:
- * - Caching en memoria para evitar re-fetches innecesarios.
+ * - Caching en memoria y persistencia local (stale-while-revalidate instantáneo).
  * - Protege los límites de la API de Airtable (revalidateOnFocus desactivado).
- * - Deduplicación de peticiones y persistencia de datos previos (stale-while-revalidate).
+ * - Deduplicación de peticiones y persistencia de datos previos.
  */
 export function useMenuData(): UseMenuDataReturn {
   const token = import.meta.env.VITE_AIRTABLE_TOKEN;
@@ -29,6 +56,7 @@ export function useMenuData(): UseMenuDataReturn {
     isConfigured ? 'airtable-menu-catalog' : null,
     fetcher,
     {
+      fallbackData: getInitialCachedData(),
       revalidateOnFocus: false,
       revalidateIfStale: false,
       dedupingInterval: 120000, // 2 minutos de deduplicación
@@ -36,6 +64,16 @@ export function useMenuData(): UseMenuDataReturn {
       shouldRetryOnError: false,
     }
   );
+
+  useEffect(() => {
+    if (data && typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      } catch (e) {
+        // Ignore
+      }
+    }
+  }, [data]);
 
   const errorMessage = !isConfigured
     ? 'Falta configurar tu token VITE_AIRTABLE_TOKEN en el archivo .env.'

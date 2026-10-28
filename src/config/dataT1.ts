@@ -40,15 +40,15 @@ export const configT1: ClientData = {
   
   menu: { 
     title: 'Nuestro Menú Destacado', 
-    categories: ['Destacados', 'Hamburguesas', 'Tacos', 'Opciones Veggie', 'Bebidas'], 
+    categories: ['Destacados', 'Hamburguesas', 'Veggie', 'Tacos', 'Bebidas'],
     items: [
-      // === DESTACADOS (AHORA CON PRECIOS REAELS) ===
-      { id: '1', title: 'Burger Clásica Doble', description: 'Doble carne, doble queso cheddar, lechuga, tomate y salsa especial.', price: '$7.900', category: 'Destacados', imagePath: '/assets-t1/menu-burger-doble.webp', badge: 'Más Vendido' },
-      { id: '2', title: 'Tacos al Pastor', description: 'Tres tacos de carne marinada, cebolla, cilantro fresco y un toque de lima.', price: '$6.500', category: 'Destacados', imagePath: '/assets-t1/menu-tacos.webp', badge: 'Picante' },
-      { id: '3', title: 'Burger Crispy', description: 'Doble medallón frito extra crujiente, lechuga, tomate y nuestra salsa casera.', price: '$8.500', category: 'Destacados', imagePath: '/assets-t1/menu-burger-crispy.webp' },
-      { id: '4', title: 'Combo Wrap', description: 'Wrap de carne asada con papas fritas y bebida a elección.', price: '$8.000', category: 'Destacados', imagePath: '/assets-t1/menu-wrap.webp' },
-      { id: '5', title: 'Veggie Burger', description: 'Medallón de lentejas y quinoa, rúcula, tomate, cebolla morada y mayonesa vegana.', price: '$7.500', category: 'Destacados', imagePath: '/assets-t1/menu-burger-veggie.webp' },
-      { id: '6', title: 'Sándwich Especial', description: 'Jamón, queso, huevo, tomate y lechuga en pan de masa madre tostado.', price: '$7.200', category: 'Destacados', imagePath: '/assets-t1/menu-sandwich.webp' },
+      // === DESTACADOS (COINCIDENTE CON EL CATÁLOGO ACTIVO) ===
+      { id: '1', title: 'Veggie Burger', description: 'Medallón de lentejas y quinoa, rúcula, tomate, cebolla morada y mayonesa vegana.', price: '.500', category: 'Destacados', imagePath: '/assets-t1/menu-burger-veggie.webp' },
+      { id: '2', title: 'Burger Clásica Doble', description: 'Doble carne, doble queso cheddar, lechuga, tomate y salsa especial.', price: '.900', category: 'Destacados', imagePath: '/assets-t1/menu-burger-doble.webp', badge: 'Más Vendido' },
+      { id: '3', title: 'Sándwich Especial', description: 'Jamón, queso, huevo, tomate y lechuga en pan de masa madre tostado.', price: '.200', category: 'Destacados', imagePath: '/assets-t1/menu-sandwich.webp' },
+      { id: '4', title: 'Combo Wrap', description: 'Wrap de carne asada con papas fritas y bebida a elección.', price: '.000', category: 'Destacados', imagePath: '/assets-t1/menu-wrap.webp' },
+      { id: '5', title: 'Tacos al Pastor', description: 'Tres tacos de carne marinada, cebolla, cilantro fresco y un toque de lima.', price: '.500', category: 'Destacados', imagePath: '/assets-t1/menu-tacos.webp', badge: 'Picante' },
+      { id: '6', title: 'Burger Crispy', description: 'Doble medallón frito extra crujiente, lechuga, tomate y nuestra salsa casera.', price: '.500', category: 'Destacados', imagePath: '/assets-t1/menu-burger-crispy.webp' },
       
       // === HAMBURGUESAS ===
       { id: '7', title: 'Burger Clásica Doble', description: 'Doble carne, doble queso cheddar, lechuga, tomate y salsa especial.', price: '$7.900', category: 'Hamburguesas', imagePath: '/assets-t1/menu-burger-doble.webp', badge: 'Más Vendido' },

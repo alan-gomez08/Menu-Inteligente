@@ -133,7 +133,7 @@ export default function Template1() {
   const [isMobileCartOpen, setIsMobileCartOpen] = useState(false);
   const [deliveryType, setDeliveryType] = useState<'takeaway' | 'delivery'>('takeaway');
   const [searchQuery, setSearchQuery] = useState('');
-  const bannerText = configuracion?.['Banner Promocional'] || '';
+  const bannerText = configuracion?.['Banner Promocional'] || '3x2 en Hamburguesas';
 
   const localAbierto = configuracion
     ? Boolean(configuracion['Local Abierto'] ?? configuracion.localAbierto)
@@ -305,7 +305,7 @@ export default function Template1() {
                   const el = document.getElementById('hamburguesas') || document.querySelector('main');
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white bg-[#D9532F] hover:bg-[#C24422] px-3 py-1 rounded-full shadow-[0_2px_8px_rgba(217,83,47,0.35)] hover:shadow-[0_2px_12px_rgba(217,83,47,0.5)] transition-all shrink-0 cursor-pointer active:scale-95 ml-1"
+                className="flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white bg-[#C23E1C] hover:bg-[#A93416] px-3 py-1 rounded-full shadow-[0_2px_8px_rgba(194,62,28,0.35)] hover:shadow-[0_2px_12px_rgba(194,62,28,0.5)] transition-all shrink-0 cursor-pointer active:scale-95 ml-1"
               >
                 <span>Aprovechala hoy</span>
                 <ArrowRight className="w-3.5 h-3.5 text-white shrink-0" />

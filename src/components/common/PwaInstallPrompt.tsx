@@ -147,7 +147,7 @@ export const PwaInstallPrompt: React.FC = () => {
               <button
                 type="button"
                 onClick={handleInstallClick}
-                className="flex items-center gap-1.5 bg-[#D9532F] hover:bg-[#C24422] text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-xs transition-transform active:scale-95 cursor-pointer shrink-0"
+                className="flex items-center gap-1.5 bg-[#C23E1C] hover:bg-[#A93416] text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-xs transition-transform active:scale-95 cursor-pointer shrink-0"
               >
                 <Download className="w-3.5 h-3.5 stroke-[2.2]" />
                 <span>Instalar</span>
@@ -157,7 +157,7 @@ export const PwaInstallPrompt: React.FC = () => {
               <button
                 type="button"
                 onClick={handleDismiss}
-                className="w-7 h-7 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                className="w-7 h-7 rounded-full text-stone-500 hover:text-stone-800 hover:bg-stone-100 flex items-center justify-center transition-colors cursor-pointer shrink-0"
                 aria-label="Cerrar aviso de instalación"
               >
                 <X className="w-3.5 h-3.5 stroke-[2.2]" />
