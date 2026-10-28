@@ -10,6 +10,7 @@ import FloatingCartBar from './components/cart/FloatingCartBar';
 import CartDesktop from './components/cart/CartDesktop';
 import CartMobileSheet from './components/cart/CartMobileSheet';
 import SplashScreen from './components/common/SplashScreen';
+import PwaInstallPrompt from './components/common/PwaInstallPrompt';
 
 import { configT1 } from './config/dataT1';
 import { useAirtableMenu } from './hooks/useAirtableMenu';
@@ -373,6 +374,11 @@ export default function Template1() {
         onAddToCart={addToCart}
         checkout={checkout}
       />
+
+      {/* ============================================================== */}
+      {/* 5.5 PWA INSTALL PROMPT (Prompt Inteligente de Instalación App) */}
+      {/* ============================================================== */}
+      <PwaInstallPrompt />
 
       {/* ============================================================== */}
       {/* 6. TOASTER NOTIFICATIONS (Sonner Clean Warm)                  */}

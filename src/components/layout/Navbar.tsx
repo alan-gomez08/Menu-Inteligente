@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Search, X, MapPin, Menu, Clock, Phone, Store } from 'lucide-react';
+import { Search, X, MapPin, Menu, Clock, Phone, Store, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
@@ -361,6 +361,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                           </div>
                         </div>
                       )}
+                    </div>
+
+                    {/* Botón de Instalación PWA en Drawer */}
+                    <div className="pt-1 pb-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsInfoDrawerOpen(false);
+                          window.dispatchEvent(new CustomEvent('open-pwa-install'));
+                        }}
+                        className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#FAF1ED] hover:bg-[#F3E2DB] text-[#D9532F] font-bold text-xs border border-[#EADBD5] shadow-2xs transition-colors cursor-pointer"
+                      >
+                        <Smartphone className="w-4 h-4 stroke-[2.2]" />
+                        <span>Instalar Menú en tu Celular</span>
+                      </button>
                     </div>
                   </div>
 
