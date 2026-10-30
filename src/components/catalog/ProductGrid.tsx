@@ -192,8 +192,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             */}
             {isFeatured ? (
               <>
-                {/* Mobile (< 1024px): Carrusel Horizontal Swipeable de Alto Impacto */}
-                <div className="lg:hidden -mx-5 sm:-mx-6 px-5 sm:px-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-3 pt-1 overscroll-x-contain flex gap-3.5">
+                {/* Mobile (< 1024px): Carrusel Horizontal Swipeable perfectamente alineado con las cards inferiores */}
+                <div className="lg:hidden w-full overflow-x-auto scrollbar-none snap-x snap-mandatory pb-3 pt-1 overscroll-x-contain flex gap-3.5">
                   {categoryItems.map((item, itemIdx) => {
                     const cartItem = cart.find((c) => c.id === item.id);
                     const quantity = cartItem ? cartItem.quantity : 0;
@@ -317,8 +317,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                       </article>
                     );
                   })}
-                  {/* Espaciador de cierre para padding lateral final en Safari */}
-                  <div className="shrink-0 w-1" aria-hidden="true" />
+                  {/* Espaciador de cierre para padding lateral final */}
+                  <div className="shrink-0 w-3" aria-hidden="true" />
                 </div>
 
                 {/* Desktop (>= 1024px): Grilla amplia de 3 columnas bien distribuidas */}
