@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { UtensilsCrossed, Plus, Minus } from 'lucide-react';
 import type { MenuItem } from '../../types';
@@ -23,6 +23,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const isSoldOut = Boolean(item.isSoldOut || item.badge?.toLowerCase().includes('agotado'));
+
+  useEffect(() => {
+    setImageError(false);
+    setImageLoaded(false);
+  }, [item.imagePath]);
 
   return (
     <article className="w-full group flex flex-col justify-between h-full bg-white rounded-[22px] p-4.5 sm:p-5 border border-stone-200/70 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_28px_-6px_rgba(0,0,0,0.08)] hover:border-stone-300 transition-all duration-300">

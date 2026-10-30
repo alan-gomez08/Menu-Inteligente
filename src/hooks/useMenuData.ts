@@ -6,7 +6,8 @@ import type {
   UseMenuDataReturn,
 } from '../types/airtable';
 
-const CACHE_KEY = 'menu_catalog_cache_v2';
+const CACHE_KEY = 'menu_catalog_cache_v3';
+const MAX_CACHE_AGE_MS = 60 * 60 * 1000; // 1 hora máximo para evitar URLs de imágenes vencidas
 
 const getInitialCachedData = (): MenuData | undefined => {
   if (typeof window === 'undefined') return undefined;
@@ -14,8 +15,11 @@ const getInitialCachedData = (): MenuData | undefined => {
     const raw = localStorage.getItem(CACHE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed && Array.isArray(parsed.productos) && parsed.productos.length > 0) {
-        return parsed;
+      // Validar que el caché no tenga más de 1 hora de antigüedad
+      if (parsed && parsed.timestamp && (Date.now() - parsed.timestamp < MAX_CACHE_AGE_MS)) {
+        if (parsed.data && Array.isArray(parsed.data.productos) && parsed.data.productos.length > 0) {
+          return parsed.data;
+        }
       }
     }
   } catch (e) {
@@ -34,7 +38,7 @@ const fetcher = async (): Promise<MenuData> => {
   const result = await getMenuData();
   if (result && typeof window !== 'undefined') {
     try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify(result));
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ data: result, timestamp: Date.now() }));
     } catch (e) {
       // Ignore cache storage error
     }
@@ -45,7 +49,7 @@ const fetcher = async (): Promise<MenuData> => {
 /**
  * Hook useMenuData optimizado con SWR:
  * - Caching en memoria y persistencia local (stale-while-revalidate instantáneo).
- * - Protege los límites de la API de Airtable (revalidateOnFocus desactivado).
+ * - Revalidación en cada montaje para garantizar URLs de imágenes frescas y activas.
  * - Deduplicación de peticiones y persistencia de datos previos.
  */
 export function useMenuData(): UseMenuDataReturn {
@@ -58,17 +62,19 @@ export function useMenuData(): UseMenuDataReturn {
     {
       fallbackData: getInitialCachedData(),
       revalidateOnFocus: false,
-      revalidateIfStale: false,
-      dedupingInterval: 120000, // 2 minutos de deduplicación
+      revalidateIfStale: true,
+      revalidateOnMount: true,
+      dedupingInterval: 60000, // 1 minuto de deduplicación
       keepPreviousData: true,
-      shouldRetryOnError: false,
+      shouldRetryOnError: true,
+      errorRetryCount: 3,
     }
   );
 
   useEffect(() => {
     if (data && typeof window !== 'undefined') {
       try {
-        localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
       } catch (e) {
         // Ignore
       }

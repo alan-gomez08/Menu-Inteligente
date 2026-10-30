@@ -1,4 +1,4 @@
-const CACHE_NAME = 'menu-inteligente-v1';
+const CACHE_NAME = 'menu-inteligente-v2';
 
 // Recursos críticos para arranque offline / PWA
 const PRECACHE_ASSETS = [
@@ -35,6 +35,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
+            console.log('[PWA Service Worker] Eliminando caché antigua:', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -47,34 +48,21 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Ignorar métodos no GET o esquemas externos no compatibles (como chrome-extension:)
+  // Ignorar métodos no GET o esquemas no compatibles
   if (request.method !== 'GET' || !request.url.startsWith('http')) {
     return;
   }
 
   const url = new URL(request.url);
 
-  // 1. Estrategia para API de Airtable: Network-First con fallback a Caché (para sincronización fresca del menú con soporte offline)
-  if (url.hostname.includes('airtable.com')) {
-    event.respondWith(
-      fetch(request)
-        .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseClone);
-            });
-          }
-          return networkResponse;
-        })
-        .catch(() => {
-          return caches.match(request);
-        })
-    );
+  // IMPORTANTE: Solicitudes externas (Airtable CDN v5.airtableusercontent.com, Google Fonts, API):
+  // Dejar que el navegador las maneje directamente sin interferencia de Service Worker
+  // para garantizar imágenes frescas sin errores de expiración, firmas o CORS.
+  if (url.origin !== self.location.origin) {
     return;
   }
 
-  // 2. Estrategia para Navegación HTML (SPA): Network-First con fallback a index.html en caché
+  // 1. Estrategia para Navegación HTML (SPA): Network-First con fallback a index.html en caché
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
@@ -85,7 +73,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 3. Estrategia para Assets Estáticos (Imágenes, Fuentes, JS, CSS): Stale-While-Revalidate
+  // 2. Estrategia para Assets Estáticos Locales (JS, CSS, SVGs, iconos): Stale-While-Revalidate
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       const fetchPromise = fetch(request).then((networkResponse) => {

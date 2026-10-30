@@ -202,7 +202,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
                     return (
                       <article
-                        key={item.id}
+                        key={`${item.id}-${item.imagePath}`}
                         className="w-[230px] sm:w-[250px] shrink-0 snap-start bg-white rounded-2xl border border-stone-200/80 p-3 shadow-xs flex flex-col justify-between select-none relative group"
                       >
                         {/* Foto Grande Hero en Contenedor Estructurado (#F1F3F5) */}
@@ -210,6 +210,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                           {item.imagePath ? (
                             <>
                               <img
+                                key={item.imagePath}
                                 src={normalizeImageUrl(item.imagePath)}
                                 alt={item.title}
                                 width="230"

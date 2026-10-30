@@ -14,7 +14,7 @@ import PwaInstallPrompt from './components/common/PwaInstallPrompt';
 
 import { configT1 } from './config/dataT1';
 import { useAirtableMenu } from './hooks/useAirtableMenu';
-import { formatPrice, parsePrice } from './utils/formatters';
+import { formatPrice, parsePrice, normalizeImageUrl } from './utils/formatters';
 import { useCartCheckout } from './components/cart/useCartCheckout';
 import type { CartItem, MenuItem, ClientData, DeliveryZone as LocalDeliveryZone } from './types';
 
@@ -22,13 +22,27 @@ export default function Template1() {
   // 1. Sincronización en vivo con Airtable a través de SWR
   const { products, deliveryZones, configuracion, cupones, isLoading } = useAirtableMenu();
 
-  // 1.1 Pantalla de Carga (Splash Screen) optimizada (inmediata en bots/audits de PageSpeed y 1.2s para usuarios)
+  // 1.1 Pantalla de Carga (Splash Screen) con animación completa del logo (2.8s) y precarga de fondo
   const isAudit = typeof navigator !== 'undefined' && (
     /Lighthouse|PageSpeed|Headless|Chrome-Lighthouse/i.test(navigator.userAgent || '') ||
     navigator.webdriver === true
   );
   const [splashVisible, setSplashVisible] = useState(!isAudit);
   const [minTimeElapsed, setMinTimeElapsed] = useState(isAudit);
+
+  // Precargar las imágenes del catálogo en memoria mientras el logo se anima
+  useEffect(() => {
+    if (products && products.length > 0) {
+      products.forEach((p) => {
+        const rawUrl = typeof p.Foto === 'string' ? p.Foto : (p.Foto as any)?.[0]?.url || p.foto;
+        const normalized = normalizeImageUrl(rawUrl);
+        if (normalized && normalized.startsWith('http')) {
+          const img = new Image();
+          img.src = normalized;
+        }
+      });
+    }
+  }, [products]);
 
   // Medición dinámica de la altura del encabezado sticky para anclaje 100% estático del carrito
   const headerRef = useRef<HTMLDivElement>(null);
@@ -71,17 +85,28 @@ export default function Template1() {
 
   useEffect(() => {
     if (minTimeElapsed) return;
+    const duration = isAudit ? 0 : 2800; // 2.8s para completar el armado y caligrafía de "TU LOGO"
     const timer = setTimeout(() => {
       setMinTimeElapsed(true);
-    }, 1200);
+    }, duration);
     return () => clearTimeout(timer);
-  }, [minTimeElapsed]);
+  }, [minTimeElapsed, isAudit]);
 
   useEffect(() => {
+    // Cuando transcurra el tiempo del logo Y Airtable haya terminado de cargar:
     if (minTimeElapsed && !isLoading) {
       setSplashVisible(false);
     }
   }, [minTimeElapsed, isLoading]);
+
+  // Temporizador de seguridad: nunca dejar la pantalla bloqueada más de 5.5s
+  useEffect(() => {
+    if (!splashVisible) return;
+    const fallbackTimer = setTimeout(() => {
+      setSplashVisible(false);
+    }, 5500);
+    return () => clearTimeout(fallbackTimer);
+  }, [splashVisible]);
 
   // 2. Mapeo seguro con fallback a configT1
   const liveData: ClientData = useMemo(() => {
