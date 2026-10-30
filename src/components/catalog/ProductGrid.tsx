@@ -192,13 +192,14 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             */}
             {isFeatured ? (
               <>
-                {/* Mobile (< 1024px): Carrusel Horizontal Swipeable perfectamente alineado con las cards inferiores */}
-                <div className="lg:hidden w-full overflow-x-auto scrollbar-none snap-x snap-mandatory pb-3 pt-1 overscroll-x-contain flex gap-3.5">
-                  {categoryItems.map((item, itemIdx) => {
-                    const cartItem = cart.find((c) => c.id === item.id);
-                    const quantity = cartItem ? cartItem.quantity : 0;
-                    const badgeConfig = getBadgeConfig(item.badge);
-                    const isSoldOut = Boolean(item.isSoldOut || item.badge?.toLowerCase().includes('agotado'));
+                {/* Mobile (< 1024px): Carrusel Horizontal Swipeable alineado a la izquierda con desvanecido gradual a la derecha */}
+                <div className="relative lg:hidden -mr-5 sm:-mr-6">
+                  <div className="w-full overflow-x-auto scrollbar-none snap-x snap-mandatory pb-3 pt-1 overscroll-x-contain flex gap-3.5 pr-5 sm:pr-6">
+                    {categoryItems.map((item, itemIdx) => {
+                      const cartItem = cart.find((c) => c.id === item.id);
+                      const quantity = cartItem ? cartItem.quantity : 0;
+                      const badgeConfig = getBadgeConfig(item.badge);
+                      const isSoldOut = Boolean(item.isSoldOut || item.badge?.toLowerCase().includes('agotado'));
 
                     return (
                       <article
@@ -320,6 +321,13 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
                   {/* Espaciador de cierre para padding lateral final */}
                   <div className="shrink-0 w-3" aria-hidden="true" />
                 </div>
+
+                {/* Gradiente difuminado indicador de scroll idéntico a la barra de categorías */}
+                <div
+                  className="absolute right-0 top-0 bottom-0 w-12 sm:w-16 bg-gradient-to-l from-[#F4F5F7] via-[#F4F5F7]/80 to-transparent pointer-events-none z-10"
+                  aria-hidden="true"
+                />
+              </div>
 
                 {/* Desktop (>= 1024px): Grilla amplia de 3 columnas bien distribuidas */}
                 <div className="hidden lg:grid lg:grid-cols-3 gap-5 w-full">
